@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "turtle_bot_teleop = differential_robot.turtle_bot_teleop:main",
         ],
     },
 )

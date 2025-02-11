@@ -1,0 +1,19 @@
+running develop
+/usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 0.1.43ubuntu1 is an invalid version and will not be supported in a future release
+  warnings.warn(
+/usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 1.1build1 is an invalid version and will not be supported in a future release
+  warnings.warn(
+running egg_info
+writing differential_robot.egg-info/PKG-INFO
+writing dependency_links to differential_robot.egg-info/dependency_links.txt
+writing entry points to differential_robot.egg-info/entry_points.txt
+writing requirements to differential_robot.egg-info/requires.txt
+writing top-level names to differential_robot.egg-info/top_level.txt
+reading manifest file 'differential_robot.egg-info/SOURCES.txt'
+writing manifest file 'differential_robot.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/lib/python3.10/site-packages/differential-robot.egg-link (link to .)
+Installing turtle_bot_teleop script to /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/lib/differential_robot
+
+Installed /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot
+running symlink_data

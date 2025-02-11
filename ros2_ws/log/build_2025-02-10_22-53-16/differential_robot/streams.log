@@ -1,0 +1,28 @@
+[0.903s] Invoking command in '/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot': PYTHONPATH=/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot/build --no-deps symlink_data
+[1.279s] running develop
+[1.364s] /usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 0.1.43ubuntu1 is an invalid version and will not be supported in a future release
+[1.364s]   warnings.warn(
+[1.364s] /usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 1.1build1 is an invalid version and will not be supported in a future release
+[1.365s]   warnings.warn(
+[1.455s] running egg_info
+[1.455s] creating differential_robot.egg-info
+[1.455s] writing differential_robot.egg-info/PKG-INFO
+[1.456s] writing dependency_links to differential_robot.egg-info/dependency_links.txt
+[1.456s] writing entry points to differential_robot.egg-info/entry_points.txt
+[1.456s] writing requirements to differential_robot.egg-info/requires.txt
+[1.462s] writing top-level names to differential_robot.egg-info/top_level.txt
+[1.462s] writing manifest file 'differential_robot.egg-info/SOURCES.txt'
+[1.462s] reading manifest file 'differential_robot.egg-info/SOURCES.txt'
+[1.463s] writing manifest file 'differential_robot.egg-info/SOURCES.txt'
+[1.463s] running build_ext
+[1.463s] Creating /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/lib/python3.10/site-packages/differential-robot.egg-link (link to .)
+[1.463s] Installing turtle_bot_teleop script to /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/lib/differential_robot
+[1.463s] 
+[1.463s] Installed /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot
+[1.463s] running symlink_data
+[1.463s] creating /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/share/ament_index
+[1.463s] creating /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/share/ament_index/resource_index
+[1.463s] creating /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/share/ament_index/resource_index/packages
+[1.464s] symbolically linking /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot/resource/differential_robot -> /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/share/ament_index/resource_index/packages
+[1.466s] symbolically linking /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot/package.xml -> /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/share/differential_robot
+[1.515s] Invoked command in '/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot' returned '0': PYTHONPATH=/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/differential_robot/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/differential_robot/build --no-deps symlink_data
