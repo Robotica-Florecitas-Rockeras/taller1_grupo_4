@@ -13,7 +13,7 @@ import fcntl
 class turtle_bot_teleop_node(Node):
     def __init__(self):
         super().__init__("turtle_bot_teleop")
-        self.turtlebot_cmdVel = self.create_publisher(Twist, "/turtlebot_cmdVel",10)
+        self.turtlebot_cmdVel = self.create_publisher(Twist, "/turtlebot_cmdVel", 10)
         angular_vel = None
         lineal_vel = None
 
@@ -41,31 +41,26 @@ class turtle_bot_teleop_node(Node):
 
         self.angular_vel = angular_vel
         self.lineal_vel = lineal_vel
-
-        self.timer = self.create_timer(0.01, self.send_velocity_command)
-        self.get_logger().info(f'This node its working :)')
         self.key = None
 
-    def send_velocity_command(self):
-        self.getKey()
-        if self.key is not None:
-            if self.key == "q":
-                self.cleanup_terminal()
-                try:
-                    self.destroy_node()
-                except Exception:
-                    pass
-                finally:
-                    self.cleanup_terminal()
+        while (self.key != "q"):
+            self.getKey()
+            msg = Twist()
+            if self.key == "w":
+                msg.linear.x = self.lineal_vel
+            elif self.key == "s":
+                msg.linear.x = -self.lineal_vel
+            elif self.key == "d":
+                msg.angular.z = self.angular_vel
+            elif self.key == "a":
+                msg.angular.z = -self.angular_vel
             else:
-                self.get_logger().info(f'{self.key}')
-        msg = Twist()
-        msg.linear.x = self.lineal_vel
-        msg.angular.z = self.angular_vel
-        self.turtlebot_cmdVel.publish(msg)
-    
+                msg.linear.x = 0.0
+                msg.angular.z = 0.0
+            self.turtlebot_cmdVel.publish(msg)
+        
     def getKey(self):
-        rlist, _, _ = select.select([sys.stdin], [], [], 0.01)
+        rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
         if rlist:
             #tty.setraw(sys.stdin.fileno())
             k = sys.stdin.read(1)
@@ -99,7 +94,7 @@ def main(args=None):
     node = turtle_bot_teleop_node()
     try:
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except KeyboardInterrupt as e:
         pass
     finally:
         node.cleanup_terminal()
