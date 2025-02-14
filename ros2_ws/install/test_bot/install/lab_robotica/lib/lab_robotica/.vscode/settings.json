@@ -1,0 +1,18 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/robotica/ros2_ws/build/rob_lab",
+        "/home/robotica/ros2_ws/install/rob_lab/lib/python3.10/site-packages",
+        "/home/robotica/ros2_ws/build/lab_robotica",
+        "/home/robotica/ros2_ws/install/lab_robotica/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/robotica/ros2_ws/build/rob_lab",
+        "/home/robotica/ros2_ws/install/rob_lab/lib/python3.10/site-packages",
+        "/home/robotica/ros2_ws/build/lab_robotica",
+        "/home/robotica/ros2_ws/install/lab_robotica/lib/python3.10/site-packages",
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages"
+    ]
+}

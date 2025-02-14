@@ -1,0 +1,1 @@
+/home/robotica/ros2_ws/build/control_robot/ament_cmake_core/control_robotConfig-version.cmake

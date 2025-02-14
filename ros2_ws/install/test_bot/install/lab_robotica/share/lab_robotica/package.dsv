@@ -1,0 +1,9 @@
+source;share/lab_robotica/hook/pythonpath.ps1
+source;share/lab_robotica/hook/pythonpath.dsv
+source;share/lab_robotica/hook/pythonpath.sh
+source;share/lab_robotica/hook/ament_prefix_path.ps1
+source;share/lab_robotica/hook/ament_prefix_path.dsv
+source;share/lab_robotica/hook/ament_prefix_path.sh
+source;../../build/lab_robotica/share/lab_robotica/hook/pythonpath_develop.ps1
+source;../../build/lab_robotica/share/lab_robotica/hook/pythonpath_develop.dsv
+source;../../build/lab_robotica/share/lab_robotica/hook/pythonpath_develop.sh
