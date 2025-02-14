@@ -58,6 +58,9 @@ class turtle_bot_teleop_node(Node):
                 msg.linear.x = 0.0
                 msg.angular.z = 0.0
             self.turtlebot_cmdVel.publish(msg)
+        if self.key == "q":
+            self.cleanup_terminal()
+            self.destroy_node()
         
     def getKey(self):
         rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
