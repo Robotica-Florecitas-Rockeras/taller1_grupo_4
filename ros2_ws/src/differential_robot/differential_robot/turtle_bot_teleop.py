@@ -5,12 +5,12 @@ from geometry_msgs.msg import Twist
 import sys, termios, tty
 
 class TeleopTurtlebot(Node):
-    def _init_(self):
+    def __init__(self):
         super().__init__("turtle_bot_teleop")
         self.publisher = self.create_publisher(Twist, 'turtlebot_cmdVel', 10)
         self.speed = float(input("VLIN: "))
         self.turn = float(input("VANG: "))
-        #self.run()
+        self.run()
 
     def get_key(self):
         fd = sys.stdin.fileno()
