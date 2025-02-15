@@ -6,11 +6,11 @@ import sys, termios, tty
 
 class TeleopTurtlebot(Node):
     def _init_(self):
-        super().__init__('turtle_bot_teleop')
+        super().__init__("turtle_bot_teleop")
         self.publisher = self.create_publisher(Twist, 'turtlebot_cmdVel', 10)
         self.speed = float(input("VLIN: "))
         self.turn = float(input("VANG: "))
-        self.run()
+        #self.run()
 
     def get_key(self):
         fd = sys.stdin.fileno()
@@ -43,6 +43,6 @@ class TeleopTurtlebot(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = TeleopTurtlebot(Node)
+    node = TeleopTurtlebot()
     rclpy.spin(node)
     rclpy.shutdown()
