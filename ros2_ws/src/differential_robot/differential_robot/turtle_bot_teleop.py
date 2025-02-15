@@ -44,7 +44,11 @@ class turtle_bot_teleop_node(Node):
         self.key = None
 
         while (self.key != "q"):
-            self.getKey()
+            try:
+                self.getKey()
+            except KeyboardInterrupt:
+                self.cleanup_terminal()
+                break
             msg = Twist()
             if self.key == "w":
                 msg.linear.x = self.lineal_vel
@@ -58,9 +62,9 @@ class turtle_bot_teleop_node(Node):
                 msg.linear.x = 0.0
                 msg.angular.z = 0.0
             self.turtlebot_cmdVel.publish(msg)
-        if self.key == "q":
-            self.cleanup_terminal()
-            self.destroy_node()
+
+        self.cleanup_terminal()
+        rclpy.try_shutdown()
         
     def getKey(self):
         rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
@@ -95,10 +99,6 @@ class turtle_bot_teleop_node(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = turtle_bot_teleop_node()
-    try:
-        rclpy.spin(node)
-    except KeyboardInterrupt as e:
-        pass
-    finally:
-        node.cleanup_terminal()
-        rclpy.shutdown()
+    rclpy.spin(node)
+    node.cleanup_terminal()
+    rclpy.shutdown()
