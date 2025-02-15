@@ -1,0 +1,16 @@
+[2.473s] Invoking command in '/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/lab_robotica': PYTHONPATH=/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/lab_robotica/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/lab_robotica/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/lab_robotica/build --no-deps symlink_data
+[2.948s] running develop
+[3.094s] /usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 0.1.43ubuntu1 is an invalid version and will not be supported in a future release
+[3.094s]   warnings.warn(
+[3.096s] /usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 1.1build1 is an invalid version and will not be supported in a future release
+[3.100s]   warnings.warn(
+[3.341s] running egg_info
+[3.341s] creating test_bot.egg-info
+[3.345s] writing test_bot.egg-info/PKG-INFO
+[3.345s] writing dependency_links to test_bot.egg-info/dependency_links.txt
+[3.345s] writing entry points to test_bot.egg-info/entry_points.txt
+[3.345s] writing requirements to test_bot.egg-info/requires.txt
+[3.345s] writing top-level names to test_bot.egg-info/top_level.txt
+[3.350s] writing manifest file 'test_bot.egg-info/SOURCES.txt'
+[3.357s] error: package directory 'test_bot' does not exist
+[3.466s] Invoked command in '/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/lab_robotica' returned '1': PYTHONPATH=/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/lab_robotica/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/install/lab_robotica/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/robotica/Downloads/Taller1/taller1_grupo_4/ros2_ws/build/lab_robotica/build --no-deps symlink_data

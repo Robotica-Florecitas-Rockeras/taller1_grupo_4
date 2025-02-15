@@ -1,0 +1,14 @@
+running develop
+/usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 0.1.43ubuntu1 is an invalid version and will not be supported in a future release
+  warnings.warn(
+/usr/lib/python3/dist-packages/pkg_resources/__init__.py:116: PkgResourcesDeprecationWarning: 1.1build1 is an invalid version and will not be supported in a future release
+  warnings.warn(
+running egg_info
+creating test_bot.egg-info
+writing test_bot.egg-info/PKG-INFO
+writing dependency_links to test_bot.egg-info/dependency_links.txt
+writing entry points to test_bot.egg-info/entry_points.txt
+writing requirements to test_bot.egg-info/requires.txt
+writing top-level names to test_bot.egg-info/top_level.txt
+writing manifest file 'test_bot.egg-info/SOURCES.txt'
+error: package directory 'test_bot' does not exist

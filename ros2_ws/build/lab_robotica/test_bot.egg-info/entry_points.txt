@@ -1,0 +1,3 @@
+[console_scripts]
+test_node = lab_robotica.turtle_bot_teleop:main
+
