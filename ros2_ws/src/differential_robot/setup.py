@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             "turtle_bot_teleop = differential_robot.turtle_bot_teleop:main",
+            "turtle_bot_interface = differential_robot.turtle_bot_interface:main",
         ],
     },
 )

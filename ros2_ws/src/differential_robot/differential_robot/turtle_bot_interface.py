@@ -73,7 +73,7 @@ class MainUX(QMainWindow):
 
         # Tortuguita :)
         self.turtle_label = QLabel(self)
-        self.turtle_pixmap = QPixmap("/home/robotica/Desktop/Taller1/src/turtlebot_controller/turtlebot_controller/turtle.png")  
+        self.turtle_pixmap = QPixmap("/home/robotica/Desktop/taller1_grupo_4/ros2_ws/src/differential_robot/differential_robot/turtle.png")  
         if self.turtle_pixmap.isNull():
             print("Error: No se pudo cargar la imagen de la tortuga")
         self.turtle_label.setPixmap(self.turtle_pixmap)
