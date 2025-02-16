@@ -46,26 +46,34 @@ class turtle_bot_teleop_node(Node):
         while (self.key != "q"):
             try:
                 self.getKey()
+            
+                msg = Twist()
+                if self.key == "w":
+                    msg.linear.x = self.lineal_vel
+                elif self.key == "s":
+                    msg.linear.x = -self.lineal_vel
+                else:
+                    msg.linear.x = 0.0
+
+                if self.key == "d":
+                    msg.angular.z = -self.angular_vel
+                elif self.key == "a":
+                    msg.angular.z = self.angular_vel
+                else:
+                    msg.angular.z = 0.0
+                self.turtlebot_cmdVel.publish(msg)
+
             except KeyboardInterrupt:
                 self.cleanup_terminal()
+                self.get_logger().info(f'Press Q to exit')
                 break
-            msg = Twist()
-            if self.key == "w":
-                msg.linear.x = self.lineal_vel
-            elif self.key == "s":
-                msg.linear.x = -self.lineal_vel
-            elif self.key == "d":
-                msg.angular.z = self.angular_vel
-            elif self.key == "a":
-                msg.angular.z = -self.angular_vel
-            else:
-                msg.linear.x = 0.0
-                msg.angular.z = 0.0
-            self.turtlebot_cmdVel.publish(msg)
+                
+        else:
+            self.get_logger().info(f'Teleop Shutdown Press ctrl+c to kill the Node\n')
 
         self.cleanup_terminal()
-        rclpy.try_shutdown()
         
+
     def getKey(self):
         rlist, _, _ = select.select([sys.stdin], [], [], 0.1)
         if rlist:
@@ -97,8 +105,24 @@ class turtle_bot_teleop_node(Node):
         os.system('stty sane')
 
 def main(args=None):
-    rclpy.init(args=args)
-    node = turtle_bot_teleop_node()
-    rclpy.spin(node)
-    node.cleanup_terminal()
-    rclpy.shutdown()
+
+    try:
+        rclpy.init(args=args)
+        node = turtle_bot_teleop_node()
+        rclpy.spin(node)
+        node.cleanup_terminal()
+        node.destroy_node()
+        rclpy.shutdown()
+
+    except KeyboardInterrupt:
+
+        if node is not None:
+            print(f" pressed Teleop Finishing...\n")
+    
+    finally:
+
+        print(f"Teleop Finished Successfuly :) \n")
+
+
+if __name__ == '__main__':
+    main()
