@@ -8,21 +8,24 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QVBoxLayout, QWid
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtGui import QPixmap, QTransform, QPainter, QPen
 from typing import Callable
+import json
 
 
 
 
 class TurtleBotInterfaceNode(Node):
-    def __init__(self, update_signal, update_orientation_signal):
+    def __init__(self, update_signal, update_orientation_signal, updated_vel_signal):
         super().__init__("turtle_bot_interface")
         self.get_logger().info('Turtle Bot Interface Started\n')
         
         # Señales para actualizar la interfaz
         self.update_signal = update_signal
         self.update_orientation_signal = update_orientation_signal
+        self.updated_vel_signal = updated_vel_signal
 
         self.turtlebot_position = self.create_subscription(Twist, "/turtlebot_position", self.update_turtle_position, 10)
         self.turtlebot_orientation = self.create_subscription(Float32, "/turtlebot_orientation", self.update_turtle_orientation, 1)
+        self.turtlebot_vel = self.create_subscription(Twist, "/turtlebot_cmdVel", self.update_trutle_vel, 1)
 
     def update_turtle_position(self, msg: Twist):
 
@@ -42,15 +45,28 @@ class TurtleBotInterfaceNode(Node):
         theta = msg.data # Ángulo en radianes
         self.update_orientation_signal.emit(theta)
 
+    def update_trutle_vel(self, msg: Twist):
+
+        x = msg.linear.x
+        y = msg.linear.y
+    
+        vel_data = (x, y)
+        
+        # Emitimos la señal con las velocidades
+        self.updated_vel_signal.emit(vel_data)
+
+
+
     
 
 class RosThread(QThread):
     position_updated = pyqtSignal(tuple)  # Señal / Hook de datos
     orientation_updated = pyqtSignal(float)
+    vel_updated = pyqtSignal(tuple) 
 
     def run(self):
         rclpy.init()
-        self.node = TurtleBotInterfaceNode(self.position_updated, self.orientation_updated)  
+        self.node = TurtleBotInterfaceNode(self.position_updated, self.orientation_updated, self.vel_updated)  
         rclpy.spin(self.node)
         self.node.destroy_node()
         rclpy.shutdown()
@@ -64,6 +80,8 @@ class MainUX(QMainWindow):
         self.setFixedSize(500, 500)
         self.setWindowTitle("Turtlebot Position")
         self.move(480, 200)
+        self.trayect_file_name = None
+        self.file_path = None
 
         # Lienzo para el recorrido
         self.canvas = QPixmap(self.size())  
@@ -113,20 +131,43 @@ class MainUX(QMainWindow):
         self.ros_thread = RosThread()
         self.ros_thread.position_updated.connect(self.update_turtle_position)  # Conexión de la posición entre ROS y la interfaz
         self.ros_thread.orientation_updated.connect(self.update_turtle_orientation)
+        self.ros_thread.vel_updated.connect(self.update_data_vel)
         self.ros_thread.start()
 
 
-        ventana = VentanaEmergente("¿Deseas una trayectoria del robot?", self.save_game)
+        ventana = VentanaEmergente("¿Deseas almacenar la trayectoria del robot?", self.save_game)
         ventana.exec_()
 
 
     def save_game(self, filename):
-        pass
+        
+        if not filename:
+            filename = "trayecto.json" 
+            
+        
+        else:
+            filename = filename + ".json"
+        
+        self.trayect_file_name = filename  # Nombre por defecto si no ingresan uno
 
+        options = QFileDialog.Options()
+        file_path, _ = QFileDialog.getSaveFileName(self, "Guardar Archivo", filename, "JSON Files (*.json)", options=options)
+
+        
+        if file_path:
+
+            self.file_path = file_path
+
+            data = [{"x": 0, "theta": 0}]
+
+            with open(file_path, "w") as file:
+                json.dump(data, file, indent=4)
+    
+    
     
     def save_window(self):
 
-        save_wd = VentanaEmergente("¿Deseas guardar el recorrido del robot?", self.save_graphic)
+        save_wd = VentanaEmergente("¿Deseas guardar el gráfico del recorrido del robot?", self.save_graphic)
         save_wd.exec_()
 
 
@@ -140,6 +181,38 @@ class MainUX(QMainWindow):
         
         if file_path:
             self.canvas.save(file_path)
+
+    
+    def update_data_vel(self, vel_data):
+        
+        if self.file_path is not None and self.trayect_file_name is not None:
+
+            # Acceder al archivo de self.file_path y reescribirlo con la nueva información
+            
+            try:
+                # Leer el contenido actual del archivo (si existe)
+                try:
+                    with open(self.file_path, "r") as file:
+                        data = json.load(file)  
+                except (FileNotFoundError, json.JSONDecodeError):
+                    data = []  
+
+                # Agregar nuevos datos
+                new_entry = {
+                    "x": vel_data[0],
+                    "theta": vel_data[1]
+                }
+                data.append(new_entry)
+
+      
+                with open(self.file_path, "w") as file:
+                    json.dump(data, file, indent=4)
+
+            except Exception as e:
+                print(f"Error actualizando el archivo: {e}")
+        
+        else:
+            pass
 
 
     def update_turtle_position(self, position_data):
@@ -244,6 +317,8 @@ class VentanaEmergente(QDialog):
     def save(self):
 
         self.ok_callback(self.filename_input.text().strip())
+        
+        self.close()
 
 
 
