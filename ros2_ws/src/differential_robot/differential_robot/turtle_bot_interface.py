@@ -12,6 +12,7 @@ import json
 from functools import partial
 
 from pcl_msgs.srv import UpdateFilename
+import subprocess
 
 
 class TurtleBotInterfaceNode(Node):
@@ -80,7 +81,7 @@ class TurtleBotInterfaceNode(Node):
     def update_trutle_vel(self, msg: Twist):
 
         x = msg.linear.x
-        y = msg.linear.y
+        y = msg.angular.z
     
         vel_data = (x, y)
         
@@ -122,6 +123,7 @@ class MainUX(QMainWindow):
         super(MainUX, self).__init__(parent=parent)
 
         self.simTime_data = 0
+        self.vel_data = {}
 
 
         # Ventana principal del recorrido
@@ -150,7 +152,7 @@ class MainUX(QMainWindow):
 
         # Tortuguita :)
         self.turtle_label = QLabel(self)
-        self.turtle_pixmap = QPixmap("/home/robotica/Desktop/Taller1/src/turtlebot_controller/turtlebot_controller/turtle.png")  
+        self.turtle_pixmap = QPixmap("ros2_ws/src/differential_robot/differential_robot/turtle.png")  
 
         if self.turtle_pixmap.isNull():
             print("Error: No se pudo cargar la imagen de la tortuga")
@@ -227,7 +229,7 @@ class MainUX(QMainWindow):
 
             self.file_path = file_path
 
-            data = [{"x": 0, "theta": 0, "simTime": 0}]
+            data = {str(0.0): {"x": 0, "theta": 0}}
 
             with open(file_path, "w") as file:
                 json.dump(data, file, indent=4)
@@ -237,9 +239,6 @@ class MainUX(QMainWindow):
 
         self.simTime_data = simTime_data
 
-
-    def update_data_vel(self, vel_data):
-        
         if self.file_path is not None and self.trayect_file_name is not None:
 
             # Acceder al archivo de self.file_path y reescribirlo con la nueva información
@@ -250,16 +249,13 @@ class MainUX(QMainWindow):
                     with open(self.file_path, "r") as file:
                         data = json.load(file)  
                 except (FileNotFoundError, json.JSONDecodeError):
-                    data = []  
+                    data = {}
 
                 # Agregar nuevos datos
-                new_entry = {
-                    "x": vel_data[0],
-                    "theta": vel_data[1],
-                    "sim_time": self.simTime_data
+                data[str(round(self.simTime_data, 1))] = {
+                    "x": self.vel_data[0],
+                    "theta": self.vel_data[1],
                 }
-
-                data.append(new_entry)
 
       
                 with open(self.file_path, "w") as file:
@@ -270,6 +266,11 @@ class MainUX(QMainWindow):
         
         else:
             pass
+
+
+    def update_data_vel(self, vel_data):
+        
+        self.vel_data = vel_data
     
 
 
@@ -290,6 +291,8 @@ class MainUX(QMainWindow):
         file_path, _ = QFileDialog.getOpenFileName(self, "Abrir Archivo", "", "JSON Files (*.json);;Todos los archivos (*)", options=options)
         
         if file_path:
+
+            # Iniciar el lado del servidor del servicio
 
             self.clear_canvas()
 
