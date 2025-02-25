@@ -1,35 +1,20 @@
 # 🚀 **TurtleBot2 Control System with ROS2 and CoppeliaSim**
 
 ## 📝 **Descripción del Proyecto**  
-Este proyecto implementa un sistema de control y monitoreo para el robot diferencial TurtleBot2 en un entorno de simulación utilizando ROS2 y CoppeliaSim. Permite controlar el robot mediante teclado, visualizar su trayectoria en tiempo real y reproducir recorridos previamente guardados. La arquitectura está diseñada con Programación Orientada a Objetos y se optimizó el rendimiento mediante el uso de threads, garantizando la modularidad y escalabilidad del sistema.
+Este proyecto implementa un sistema de control y monitoreo para el robot diferencial TurtleBot2 en un entorno de simulación utilizando ROS2 y CoppeliaSim. Permite controlar el robot mediante teclado, visualizar su trayectoria en tiempo real y reproducir recorridos previamente guardados. La arquitectura está diseñada con principios de Programación Orientada a Objetos y se optimizó el rendimiento mediante threads, garantizando la modularidad y escalabilidad del sistema.
 
 ---
 
 ## 📦 **Estructura del Repositorio**  
 ```plaintext
-turtlebot_project
+ros2_ws/src/differential_robot/differential_robot
 ├── README.md
-├── src
-│   ├── turtle_bot_teleop
-│   │   ├── teleop_node.py
-│   ├── turtle_bot_interface
-│   │   ├── interface_node.py
-│   └── turtle_bot_player
-│       ├── player_node.py
-├── launch
-│   ├── turtle_bot_launch.py
-└── docs
-    ├── manual_usuario.pdf
-    └── informe_tecnico.pdf
+├── __init__.py
+├── turtle.png
+├── turtle_bot_interface.py
+├── turtle_bot_player.py
+└── turtle_bot_teleop.py
 ```
-
----
-
-## 🧩 **Características Principales**  
-✅ Teleoperación mediante teclado (`W`, `A`, `S`, `D`).  
-✅ Visualización gráfica en tiempo real con PyQt5.  
-✅ Registro de trayectorias en formato `.json`.  
-✅ Reproducción automática de recorridos usando servicios ROS2.  
 
 ---
 
@@ -42,33 +27,6 @@ turtlebot_project
 
 ---
 
-## ⚙️ **Instalación**  
-
-### 1. Clonar el repositorio  
-```bash
-git clone https://github.com/Robotica-Florecitas-Rockeras/taller1_grupo_4.git
-cd turtlebot_project
-```
-
-### 2. Configurar el entorno virtual (opcional)  
-```bash
-python3 -m venv ros2_env
-source ros2_env/bin/activate
-```
-
-### 3. Instalar las dependencias  
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Compilar el paquete ROS2  
-```bash
-colcon build
-source install/setup.bash
-```
-
----
-
 ## 🚀 **Uso del Sistema**  
 
 ### **1. Iniciar la simulación en CoppeliaSim**  
@@ -78,27 +36,18 @@ source install/setup.bash
 ### **2. Ejecutar los nodos de ROS2**  
 - **Nodo de Teleoperación:**  
 ```bash
-ros2 run turtle_bot_teleop teleop_node
+ros2 run differential_robot turtle_bot_teleop
 ```
 
 - **Nodo de Interfaz Gráfica:**  
 ```bash
-ros2 run turtle_bot_interface interface_node
+ros2 run differential_robot turtle_bot_interface
 ```
 
 - **Nodo de Reproducción de Trayectorias:**  
 ```bash
-ros2 run turtle_bot_player player_node
+ros2 run differential_robot turtle_bot_player
 ```
-
----
-
-## 🗂️ **Descripción de los Archivos Principales**  
-- **`teleop_node.py`**: Captura las teclas presionadas y publica comandos de velocidad en `/turtlebot_cmdVel`.  
-- **`interface_node.py`**: Visualiza la trayectoria y permite guardar los datos en un archivo `.json`.  
-- **`player_node.py`**: Reproduce los recorridos previamente guardados, enviando comandos al tópico `/turtlebot_cmdVel`.  
-
----
 
 ## 🤝 **Autores**  
 - Mateo Chilito Avella - Universidad de los Andes  
@@ -111,3 +60,4 @@ ros2 run turtle_bot_player player_node
 ## 📝 **Licencia**  
 Este proyecto está licenciado bajo la Licencia MIT. Consulte el archivo `LICENSE` para más detalles.  
 
+---
